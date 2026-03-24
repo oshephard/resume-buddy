@@ -11,6 +11,11 @@ export type JobPostingSkill = {
 
 export type JobProfile = {
   schemaVersion: "1.0.0";
+  /**
+   * Normalized plain text the user pasted (v1: no URL fetch).
+   * Preserved for LLM analysis and audit; structured fields may be filled in later pipeline stages.
+   */
+  sourcePlainText: string;
   /** Role title as stated or inferred from the posting. */
   title: string;
   /** Employer or team name when available. */

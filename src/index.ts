@@ -3,6 +3,17 @@ export type {
   JobProfile,
   JobRequirementLevel,
 } from "./job-profile/types.js";
+export {
+  ingestJobPostingFromPlainText,
+  ingestJobPostingsFromPlainText,
+  JobPostingPlainTextError,
+  normalizeJobPostingPlainText,
+} from "./job-profile/ingest.js";
+export {
+  formatJobProfileAjvErrors,
+  validateJobProfile,
+  type ValidateJobProfileResult,
+} from "./job-profile/validate.js";
 export type {
   ContactBlock,
   ProfileLink,

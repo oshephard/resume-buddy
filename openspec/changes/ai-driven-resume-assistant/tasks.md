@@ -8,7 +8,7 @@
 ## 2. Job Posting Analysis
 
 - [x] 2.1 Define `JobProfile` model for job postings (title, company, responsibilities, skills, keywords).
-- [ ] 2.2 Implement ingestion of job postings from **pasted plain text** into `JobProfile` (v1: no URL fetch).
+- [x] 2.2 Implement ingestion of job postings from **pasted plain text** into `JobProfile` (v1: no URL fetch).
 - [ ] 2.3 Implement skill and requirement extraction via **LLM** into schema-validated `JobProfile` (determine relevance to the role from the posting; **no** heuristic importance scoring in v1).
 - [ ] 2.4 When present in `JobProfile` output, carry **required vs preferred** (or equivalent) as **LLM interpretation** of the posting—not a separate rules engine.
 

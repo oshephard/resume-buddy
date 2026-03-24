@@ -5,12 +5,24 @@
   "description": "Structured representation of a job posting for analysis and resume targeting (v1). Populated from pasted text and LLM analysis in later pipeline stages.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schemaVersion", "title", "responsibilities", "skills", "keywords"],
+  "required": [
+    "schemaVersion",
+    "sourcePlainText",
+    "title",
+    "responsibilities",
+    "skills",
+    "keywords"
+  ],
   "properties": {
     "schemaVersion": {
       "type": "string",
       "const": "1.0.0",
       "description": "JobProfile schema revision. Bump only for breaking structural changes."
+    },
+    "sourcePlainText": {
+      "type": "string",
+      "minLength": 1,
+      "description": "User-pasted job posting body (v1: plain text only; no fetched HTML)."
     },
     "title": {
       "type": "string",
