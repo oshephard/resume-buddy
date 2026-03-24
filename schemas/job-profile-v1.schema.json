@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "resume-buddy:job-profile-v1",
+  "title": "ResumeBuddy JobProfile",
+  "description": "Structured representation of a job posting for analysis and resume targeting (v1). Populated from pasted text and LLM analysis in later pipeline stages.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "title", "responsibilities", "skills", "keywords"],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "JobProfile schema revision. Bump only for breaking structural changes."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Role title as stated or inferred from the posting."
+    },
+    "company": {
+      "type": "string",
+      "description": "Employer or team name when available."
+    },
+    "level": {
+      "type": "string",
+      "description": "Seniority or level line if present (e.g. Senior, L5)."
+    },
+    "location": {
+      "type": "string",
+      "description": "Work location or arrangement when stated."
+    },
+    "responsibilities": {
+      "type": "array",
+      "description": "Responsibilities and duties derived from the posting.",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "skills": {
+      "type": "array",
+      "description": "Skills relevant to the role; ordering reflects LLM output (no separate importance rank in v1).",
+      "items": { "$ref": "#/$defs/jobPostingSkill" }
+    },
+    "tools": {
+      "type": "array",
+      "description": "Tools, platforms, or technologies named in the posting.",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "keywords": {
+      "type": "array",
+      "description": "Salient keywords and phrases for targeting.",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "$defs": {
+    "jobRequirementLevel": {
+      "type": "string",
+      "enum": ["required", "preferred", "other"],
+      "description": "LLM interpretation of how the posting frames the criterion—not from a separate rules engine."
+    },
+    "jobPostingSkill": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Skill or competency label."
+        },
+        "requirementLevel": {
+          "$ref": "#/$defs/jobRequirementLevel",
+          "description": "When the posting implies required vs nice-to-have, encoded here as LLM interpretation."
+        }
+      }
+    }
+  }
+}

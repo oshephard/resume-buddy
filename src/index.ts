@@ -1,4 +1,9 @@
 export type {
+  JobPostingSkill,
+  JobProfile,
+  JobRequirementLevel,
+} from "./job-profile/types.js";
+export type {
   ContactBlock,
   ProfileLink,
   ResumeAst,
