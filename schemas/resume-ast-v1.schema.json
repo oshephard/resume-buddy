@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "resume-buddy:resume-ast-v1",
+  "title": "ResumeBuddy Resume AST",
+  "description": "Canonical structured resume model (v1). JSON is the interchange encoding; this schema is the normative shape.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "metadata", "sections"],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "AST schema revision. Bump only for breaking structural changes."
+    },
+    "metadata": { "$ref": "#/$defs/resumeMetadata" },
+    "sections": {
+      "type": "array",
+      "description": "Ordered top-level resume sections (display and export order follow this array).",
+      "items": { "$ref": "#/$defs/resumeSection" }
+    }
+  },
+  "$defs": {
+    "resumeMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fullName"],
+      "properties": {
+        "fullName": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Candidate name as it should appear on the resume."
+        },
+        "headline": {
+          "type": "string",
+          "description": "Short professional headline or desired title line."
+        },
+        "summary": {
+          "type": "string",
+          "description": "Prose summary or objective; optional if represented as a summary section instead."
+        },
+        "locale": {
+          "type": "string",
+          "description": "BCP 47 language tag for locale-sensitive export (e.g. en-US)."
+        },
+        "contact": { "$ref": "#/$defs/contactBlock" }
+      }
+    },
+    "contactBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "emails": {
+          "type": "array",
+          "items": { "type": "string", "format": "email" }
+        },
+        "phones": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "location": {
+          "type": "string",
+          "description": "City/region or full location string."
+        },
+        "profiles": {
+          "type": "array",
+          "description": "Links such as LinkedIn, GitHub, portfolio.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["label", "url"],
+            "properties": {
+              "label": { "type": "string", "minLength": 1 },
+              "url": { "type": "string", "minLength": 1, "format": "uri" }
+            }
+          }
+        }
+      }
+    },
+    "resumeSection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "title", "entries"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable identifier for diffing, variants, and selective edits."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Semantic section type for pipelines and ATS-friendly export.",
+          "enum": [
+            "summary",
+            "experience",
+            "education",
+            "skills",
+            "projects",
+            "certifications",
+            "awards",
+            "publications",
+            "volunteering",
+            "other"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-visible section heading (e.g. Experience, Education)."
+        },
+        "entries": {
+          "type": "array",
+          "description": "Items within the section; may be empty (e.g. placeholder section).",
+          "items": { "$ref": "#/$defs/resumeEntry" }
+        }
+      }
+    },
+    "resumeEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "bullets"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable identifier for this entry (role, degree, project, etc.)."
+        },
+        "title": {
+          "type": "string",
+          "description": "Role title, degree name, project name, certification name, etc."
+        },
+        "organization": {
+          "type": "string",
+          "description": "Employer, school, issuer, or affiliated org."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location associated with the entry, if applicable."
+        },
+        "startDate": {
+          "type": "string",
+          "description": "Start date; ISO 8601 full date (YYYY-MM-DD) or year-month (YYYY-MM) or year (YYYY)."
+        },
+        "endDate": {
+          "type": ["string", "null"],
+          "description": "End date in the same conventions as startDate, or null for present/ongoing when isCurrent is true."
+        },
+        "isCurrent": {
+          "type": "boolean",
+          "description": "True when the entry is ongoing (e.g. current role)."
+        },
+        "bullets": {
+          "type": "array",
+          "description": "Achievement or detail lines; empty for entries that are single-line (e.g. a certification without sub-bullets).",
+          "items": { "$ref": "#/$defs/resumeBullet" }
+        }
+      }
+    },
+    "resumeBullet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "text"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable identifier for diffing and selective edits."
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Bullet body text."
+        }
+      }
+    }
+  }
+}
