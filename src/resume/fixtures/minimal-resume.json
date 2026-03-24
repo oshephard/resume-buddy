@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "metadata": {
+    "fullName": "Jane Example",
+    "headline": "Software Engineer",
+    "locale": "en-US",
+    "contact": {
+      "emails": ["jane@example.com"],
+      "phones": ["+1 555 0100"],
+      "location": "San Francisco, CA",
+      "profiles": [
+        { "label": "GitHub", "url": "https://github.com/jane" }
+      ]
+    }
+  },
+  "sections": [
+    {
+      "id": "sec-exp-1",
+      "kind": "experience",
+      "title": "Experience",
+      "entries": [
+        {
+          "id": "ent-acme",
+          "title": "Senior Engineer",
+          "organization": "Acme Corp",
+          "location": "Remote",
+          "startDate": "2021-03",
+          "endDate": null,
+          "isCurrent": true,
+          "bullets": [
+            {
+              "id": "bul-1",
+              "text": "Shipped features used by 1M+ users."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

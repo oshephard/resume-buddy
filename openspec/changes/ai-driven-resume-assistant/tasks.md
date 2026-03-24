@@ -1,9 +1,9 @@
 ## 1. Resume AST and Parsing
 
 - [x] 1.1 Define canonical Resume AST schema (sections, entries, bullets, metadata).
-- [ ] 1.2 Implement schema validation utilities for Resume AST.
-- [ ] 1.3 Implement import from **JSON** into Resume AST with schema validation.
-- [ ] 1.4 Implement export: **JSON** (lossless round-trip) and **ATS-friendly Markdown** (export for humans/ATS uploads; not a second canonical interchange format in v1).
+- [x] 1.2 Implement schema validation utilities for Resume AST.
+- [x] 1.3 Implement import from **JSON** into Resume AST with schema validation.
+- [x] 1.4 Implement export: **JSON** (lossless round-trip) and **ATS-friendly Markdown** (export for humans/ATS uploads; not a second canonical interchange format in v1).
 
 ## 2. Job Posting Analysis
 
