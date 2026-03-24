@@ -5,10 +5,10 @@ The system SHALL produce human-readable summaries that describe each proposed re
 
 #### Scenario: Explaining a bullet rewrite
 - **WHEN** the system proposes rewriting an existing resume bullet
-- **THEN** the system SHALL generate a short explanation that states the original text, the new text, and the rationale (e.g., aligning with a specific requirement or keyword in the job posting).
+- **THEN** the system SHALL generate a short explanation that states the original text, the new text, and the rationale (e.g., aligning with a specific requirement or concept from the job posting).
 
-### Requirement: Provide structured diffs for AST changes
-The system SHALL compute structured diffs between the original and edited Resume ASTs so that changes can be programmatically inspected, tracked, and selectively applied.
+### Requirement: Provide structured diffs for Resume AST changes
+The system SHALL compute structured diffs between the original and edited **Resume AST** so that changes can be programmatically inspected, tracked, and selectively applied.
 
 #### Scenario: Diffing two resume variants
 - **WHEN** a user compares a base resume with an edited variant
@@ -20,5 +20,5 @@ The system SHALL allow users (or calling clients) to accept or reject proposed c
 
 #### Scenario: Applying a subset of suggestions
 - **WHEN** a user chooses to accept only some of the proposed edits
-- **THEN** the system SHALL apply only the selected changes to the Resume AST
-- **AND** the system SHALL ensure that the resulting AST remains valid and consistent with the canonical schema.
+- **THEN** the system SHALL apply only the selected changes to the **Resume AST**
+- **AND** the system SHALL ensure that the resulting representation remains valid and consistent with the canonical schema.
